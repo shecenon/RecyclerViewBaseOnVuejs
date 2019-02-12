@@ -19,7 +19,6 @@ vue2.0 + elementUI 后台管理平台
   "mockjs": "^1.0.1-beta3", //模拟数据使用
      
      更新：vue已升级至2.5.X，elementUI已升级至2.2，其他相关依赖也已升级，
-     具体请参考https://github.com/suweiteng/vue2-management-platform/blob/master/package.json
      
     
     
@@ -56,12 +55,12 @@ vue2.0 + elementUI 后台管理平台
 2018年4月2日：修复ElementUI升级2.x引起的弹窗问题:[issue 10](https://github.com/suweiteng/vue2-management-platform/issues/10) 
 
  
- 
+<!--  
 # 截图预览
 ![](http://images2015.cnblogs.com/blog/1023587/201704/1023587-20170417163412243-1686976549.png)
 ![](http://images2015.cnblogs.com/blog/1023587/201704/1023587-20170417163442727-1202100665.png)
 ![](http://images2015.cnblogs.com/blog/1023587/201704/1023587-20170417163508102-673769802.png)
-![](http://images2015.cnblogs.com/blog/1023587/201704/1023587-20170424111627287-2091967244.gif)
+![](http://images2015.cnblogs.com/blog/1023587/201704/1023587-20170424111627287-2091967244.gif) -->
 ## Build Setup
 
 ``` bash
@@ -74,6 +73,6 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-请点右上角star，谢谢
+<!-- 请点右上角star，谢谢 -->
 
-![](https://images2018.cnblogs.com/blog/1023587/201802/1023587-20180226133036435-1544066188.png)
+<!-- ![](https://images2018.cnblogs.com/blog/1023587/201802/1023587-20180226133036435-1544066188.png) -->
