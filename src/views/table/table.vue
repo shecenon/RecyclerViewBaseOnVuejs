@@ -33,14 +33,20 @@
         <!--表格-->
         <el-table
           :data="tableData"
+           :show-header="false"
           border
           style="width: 100%">
           <el-table-column type="selection">
           </el-table-column>
           <el-table-column
-            prop="date"
+          prop="date"
             label="出生日期"
             width="180">
+            <template scope="scope">
+            <img src="static/images/hamburger.png" class="image">
+            <span> {{ scope.row.date }}</span>
+            <span> {{ scope.row.address }}</span>
+            </template>
           </el-table-column>
           <el-table-column
             prop="name"
@@ -53,7 +59,7 @@
           </el-table-column>
           <el-table-column label="操作">
             <template scope="scope">
-              <el-button type="primary" size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+              <el-button type="primary"  style="display: block;" size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
               <el-button type="danger" size="small" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
           </el-table-column>
@@ -204,5 +210,11 @@
   .el-message-box__btns .cancel {
     float: right;
     margin-left: 10px;
+  }
+
+  .image {
+    width: 60px;
+    height: 60px;
+    display: block;
   }
 </style>
