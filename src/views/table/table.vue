@@ -30,6 +30,9 @@
           <el-button type="primary" @click="onSubmit">查询</el-button>
           <a href="javascript:;" id="download" style="background-color:#409EFF;color: #fff;padding: 12px 10px!important;margin-left: 10px!important;border-radius:4px " @click="download()" download="download.csv">导出数据</a>
         </el-form>
+
+        <el-container style="height: 500px; border: 1px solid #eee">
+ <el-aside width="600px" style="background-color: rgb(238, 241, 246)">
         <!--表格-->
         <el-table
           :data="tableData"
@@ -46,6 +49,7 @@
             <img src="static/images/hamburger.png" class="image">
             <span> {{ scope.row.date }}</span>
             <span> {{ scope.row.address }}</span>
+            <span> {{ scope.row.company }}</span>
             </template>
           </el-table-column>
           <el-table-column
@@ -64,6 +68,43 @@
             </template>
           </el-table-column>
         </el-table>
+  </el-aside> 
+
+<el-main class="activity-detail">
+      <img src="static/images/hamburger.png" class="image">
+            <span> {{ currentItem.name }}</span>
+            <div> {{ currentItem.company }}</div>
+            <div class="address"> {{ currentItem.address }}</div>
+            <div class="description"> {{ currentItem.description }}</div>
+            <div style="float:right">
+            <el-button type="text" @click="handleLike">点赞</el-button>
+            <span style="color: #409EFF;">|</span> 
+            <el-button type="text" icon="el-icon-edit" @click="handleComment">评论</el-button>
+            </div>
+            <el-input v-model="commentInput" type="textarea" autosize placeholder="请输入内容"></el-input>
+</el-main>
+
+  <el-aside> 
+    <span class="title">基本信息</span>
+ <el-form label-position="top" size="medium" inline class="demo-table-expand">
+          <el-form-item label="客户名称">
+            <span>123</span>
+          </el-form-item>          
+        </el-form>
+
+    <span class="title">其他信息</span>
+ <el-form label-position="top" inline  size="mini" class="demo-table-expand">
+          <el-form-item label="拜访时间">
+            <span>2019.1.20 09:10</span>
+          </el-form-item>
+          <el-form-item label="提交时间">
+            <span>2019.1.20 18:30</span>
+          </el-form-item>         
+        </el-form>
+  </el-aside> 
+
+  </el-container>
+
         <div class="block">
           <el-pagination
             @size-change="handleSizeChange"
@@ -118,8 +159,9 @@
           address: '',
           date: '',
         },
-        currentPage: 4,
-        table_index: 999,
+        currentPage: 1,
+        table_index: 0,
+        commentInput: ""
       };
     },
     created () {
@@ -137,6 +179,23 @@
         }
       });
     },
+    computed: {
+      // a computed getter
+      currentItem: function () {
+        // `this` points to the vm instance
+        if (!this.tableData) {
+          return {
+            "name": "",
+            "company": "",
+            "address": ""
+          };
+        }
+        if (this.table_index >= this.tableData.length || this.table_index < 0) {
+          this.table_index = 0;
+        }
+        return this.tableData[this.table_index];
+      }
+    },
     methods: {
       onSubmit () {
         this.$message('模拟数据，这个方法并不管用哦~');
@@ -152,6 +211,10 @@
         this.dialogFormVisible = true;
         this.form = Object.assign({}, row);
         this.table_index = index;
+      },
+      handleComment() {
+      },
+      handleLike() {
       },
       handleSave () {
         this.$confirm('确认提交吗？', '提示', {
@@ -212,9 +275,59 @@
     margin-left: 10px;
   }
 
+    .demo-table-expand {
+    font-size: 0;
+  }
+  .demo-table-expand label {
+    /* width: 90px; */
+    color: #99a9bf;
+  }
+  .demo-table-expand .el-form-item {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 0;
+    /* width: 50%; */
+  }
+
+  .title {
+    font-size: large;
+    font-weight: bold; 
+    padding:  20px 0 20px;
+    line-height: 60px;
+  }
+
   .image {
     width: 60px;
     height: 60px;
     display: block;
+  }
+
+.activity-detail {
+
+}
+
+  .activity-detail .avatar {
+    width: 80px;
+    height: 80px;
+    padding: 3px;
+  }
+
+  .activity-detail .name {
+    font-size: medium;
+  }
+
+  .activity-detail .contact-info {
+    color: lightskyblue;
+  }
+
+.address {
+    padding:  10px 0 10px;
+}
+  .address:before{
+    content: "地址："
+  }
+
+  .description {
+    padding:  10px 0 10px;
   }
 </style>
