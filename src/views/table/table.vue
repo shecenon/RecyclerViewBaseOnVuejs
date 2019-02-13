@@ -38,21 +38,45 @@
         </el-form>
 
         <el-container style="height: 500px; border: 1px solid #eee">
-          <el-aside width="600px" style="background-color: rgb(238, 241, 246)">
+          <el-aside width="400px" style="background-color: rgb(238, 241, 246)">
             <!--表格-->
             <el-table :data="tableData" :show-header="false" border style="width: 100%">
-              <el-table-column type="selection"></el-table-column>
-              <el-table-column prop="date" label="出生日期" width="180">
+              <!-- <el-table-column prop="date" label="出生日期" width="180"> -->
+              <el-table-column>
                 <template scope="scope">
-                  <img src="static/images/hamburger.png" class="image">
+                  <!-- <img src="static/images/hamburger.png" class="image">
                   <span>{{ scope.row.date }}</span>
                   <span>{{ scope.row.address }}</span>
-                  <span>{{ scope.row.company }}</span>
+                  <span>{{ scope.row.company }}</span>-->
+                  <el-container>
+                    <el-aside width="60px">
+                      <img src="static/images/hamburger.png" class="image">
+                    </el-aside>
+                    <el-main>
+                      <el-row type="flex" class="row-bg" justify="space-between">
+                        <el-col>
+                          <span>{{ scope.row.name }}</span>
+                          <span class="activity-info">{{ scope.row.activity }}</span>
+                        </el-col>
+                        <el-col>
+                          <div style="float:right">
+                            <span>点赞({{scope.row.likes}})</span>
+                            <span style="color: #409EFF;">|</span>
+                            <span>评论({{scope.row.replies}})</span>
+                          </div>
+                        </el-col>
+                      </el-row>
+                      <el-row>
+                        <span class="date">{{ scope.row.date }}</span>
+                        <span style="color: #409EFF;">|</span>
+                        <span>{{scope.row.company}}</span>
+                      </el-row>
+                    </el-main>
+                  </el-container>
+                  <p class="description">{{ scope.row.description }}</p>
                 </template>
               </el-table-column>
-              <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-              <el-table-column prop="address" label="地址"></el-table-column>
-              <el-table-column label="操作">
+              <!-- <el-table-column label="操作">
                 <template scope="scope">
                   <el-button
                     type="primary"
@@ -66,16 +90,38 @@
                     @click="handleDelete(scope.$index, scope.row)"
                   >删除</el-button>
                 </template>
-              </el-table-column>
+              </el-table-column>-->
             </el-table>
           </el-aside>
 
           <el-main class="activity-detail">
-            <img src="static/images/hamburger.png" class="image">
-            <span>{{ currentItem.name }}</span>
-            <div>{{ currentItem.company }}</div>
+            <el-container>
+              <el-aside width="100px">
+                <img src="static/images/hamburger.png" class="avatar">
+              </el-aside>
+              <el-main>
+                <el-row type="flex" class="row-bg" justify="space-between">
+                  <el-col>
+                    <span>{{ currentItem.name }}</span>
+                    <span class="activity-info">{{ currentItem.activity }}</span>
+                  </el-col>
+                  <el-col>
+                    <el-button
+                      type="text"
+                      style="float:right"
+                      size="medium"
+                      plain
+                      @click="handleDelete(scope.$index, scope.row)"
+                    >编辑</el-button>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <div class="date">{{ currentItem.date }}</div>
+                </el-row>
+              </el-main>
+            </el-container>
             <div class="address">{{ currentItem.address }}</div>
-            <div class="description">{{ currentItem.description }}</div>
+            <p class="description">{{ currentItem.description }}</p>
             <div style="float:right">
               <el-button type="text" @click="handleLike">点赞</el-button>
               <span style="color: #409EFF;">|</span>
@@ -182,7 +228,7 @@ export default {
     // a computed getter
     currentItem: function() {
       // `this` points to the vm instance
-      if (!this.tableData) {
+      if (!this.tableData || this.tableData.length === 0) {
         return {
           name: "",
           company: "",
@@ -304,20 +350,29 @@ export default {
 }
 
 .activity-detail {
+  height: auto;
+  /* text-align: center; */
 }
 
-.activity-detail .avatar {
+.avatar {
   width: 80px;
   height: 80px;
-  padding: 3px;
+  /* padding: 3px; */
 }
 
 .activity-detail .name {
   font-size: medium;
 }
 
-.activity-detail .contact-info {
+.activity-detail .activity-info {
   color: lightskyblue;
+  padding: 10px;
+}
+
+.extra-info {
+  display: flex;
+  /* position: absolute; */
+  height: 40px;
 }
 
 .address {
@@ -329,5 +384,10 @@ export default {
 
 .description {
   padding: 10px 0 10px;
+  line-height: normal;
+}
+
+.date {
+  /* text-align: center; */
 }
 </style>
