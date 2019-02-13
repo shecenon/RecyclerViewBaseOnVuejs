@@ -44,36 +44,30 @@
               <!-- <el-table-column prop="date" label="出生日期" width="180"> -->
               <el-table-column>
                 <template scope="scope">
-                  <!-- <img src="static/images/hamburger.png" class="image">
-                  <span>{{ scope.row.date }}</span>
-                  <span>{{ scope.row.address }}</span>
-                  <span>{{ scope.row.company }}</span>-->
                   <el-container>
-                    <el-aside width="60px">
-                      <img src="static/images/hamburger.png" class="image">
+                    <el-aside width="60px" style="text-align:center">
+                      <img :src="scope.row.avatar" class="image">
                     </el-aside>
                     <el-main>
                       <el-row type="flex" class="row-bg" justify="space-between">
                         <el-col>
                           <span>{{ scope.row.name }}</span>
                           <span class="activity-info">{{ scope.row.activity }}</span>
-                        </el-col>
-                        <el-col>
                           <div style="float:right">
                             <span>点赞({{scope.row.likes}})</span>
-                            <span style="color: #409EFF;">|</span>
+                            <span class="separate"/>
                             <span>评论({{scope.row.replies}})</span>
                           </div>
                         </el-col>
                       </el-row>
                       <el-row>
                         <span class="date">{{ scope.row.date }}</span>
-                        <span style="color: #409EFF;">|</span>
+                        <span class="separate"/>
                         <span>{{scope.row.company}}</span>
                       </el-row>
                     </el-main>
                   </el-container>
-                  <p class="description">{{ scope.row.description }}</p>
+                  <p class="description short">{{ scope.row.description }}</p>
                 </template>
               </el-table-column>
               <!-- <el-table-column label="操作">
@@ -96,8 +90,8 @@
 
           <el-main class="activity-detail">
             <el-container>
-              <el-aside width="100px">
-                <img src="static/images/hamburger.png" class="avatar">
+              <el-aside width="80px" style="text-align:center;height: 80px">
+                <img :src="currentItem.avatar" class="avatar">
               </el-aside>
               <el-main>
                 <el-row type="flex" class="row-bg" justify="space-between">
@@ -124,7 +118,7 @@
             <p class="description">{{ currentItem.description }}</p>
             <div style="float:right">
               <el-button type="text" @click="handleLike">点赞</el-button>
-              <span style="color: #409EFF;">|</span>
+              <span class="separate"/>
               <el-button type="text" icon="el-icon-edit" @click="handleComment">评论</el-button>
             </div>
             <el-input v-model="commentInput" type="textarea" autosize placeholder="请输入内容"></el-input>
@@ -387,7 +381,19 @@ export default {
   line-height: normal;
 }
 
+.short {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .date {
   /* text-align: center; */
+}
+
+.separate::before {
+  color: #409eff;
+  padding: 8px 0 8px;
+  content: "|";
 }
 </style>

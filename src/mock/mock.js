@@ -23,8 +23,29 @@ export default {
           "description": "@cparagraph",
           "likes": "@integer(0, 200)",
           "replies": "@integer(0, 1000)",
-          "company": "@csentence(3, 5)",
-          "activity": '@cword(3, 5)'
+          // "company": "@csentence(3, 5)",
+          "company|1": [
+            "上海汉川信息科技有限公司",
+            "天玑科技 ",
+            "海康威视 ",
+            "杭州钱塘大数据交易中心",
+            "北京创新乐知网络技术有限公司 ",
+            "钉钉（中国）信息技术有限公司",
+            "腾讯控股有限公司",
+            "北京雪球信息科技有限公司",
+            "北京数字冰雹信息技术有限公司"],
+          "avatar|1": [
+            "static/images/hamburger.png",
+            "static/images/cliff.jpg",
+            "static/images/tower.jpg",
+            "static/images/lotus.jpg",
+          ],
+          "activity|1": ["电话拜访",
+            "微信QQ",
+            "钉钉",
+            "商务聚餐"
+          ]
+        // '@cword(3, 5)'
         }
       ]
     });
