@@ -37,28 +37,26 @@
           >导出数据</a>
         </el-form>
 
-        <el-container style="height: 500px; border: 1px solid #eee">
-          <el-aside width="400px" style="background-color: rgb(238, 241, 246)">
+        <el-container style="max-height: 80vh">
+          <el-aside width="400px" class="activities">
             <!--表格-->
             <el-table :data="tableData" :show-header="false" border style="width: 100%">
               <!-- <el-table-column prop="date" label="出生日期" width="180"> -->
               <el-table-column>
                 <template scope="scope">
                   <el-container>
-                    <el-aside width="60px" style="text-align:center">
+                    <!-- <el-aside width="60px" style="text-align:center"> -->
                       <img :src="scope.row.avatar" class="image">
-                    </el-aside>
+                    <!-- </el-aside> -->
                     <el-main>
-                      <el-row type="flex" class="row-bg" justify="space-between">
-                        <el-col>
-                          <span>{{ scope.row.name }}</span>
-                          <span class="activity-info">{{ scope.row.activity }}</span>
+                      <el-row>
                           <div style="float:right">
-                            <span>点赞({{scope.row.likes}})</span>
+                            <span class="activity-info">点赞({{scope.row.likes}})</span>
                             <span class="separate"/>
-                            <span>评论({{scope.row.replies}})</span>
+                            <span class="activity-info">评论({{scope.row.replies}})</span>
                           </div>
-                        </el-col>
+                          <span class="name">{{ scope.row.name }}</span>
+                          <span class="activity-info">{{ scope.row.activity }}</span>
                       </el-row>
                       <el-row>
                         <span class="date">{{ scope.row.date }}</span>
@@ -89,17 +87,14 @@
           </el-aside>
 
           <el-main class="activity-detail">
-            <el-container>
-              <el-aside width="80px" style="text-align:center;height: 80px">
+            <el-container >
+              <!-- <el-aside width="88px" > -->
                 <img :src="currentItem.avatar" class="avatar">
-              </el-aside>
+              <!-- </el-aside> -->
               <el-main>
-                <el-row type="flex" class="row-bg" justify="space-between">
-                  <el-col>
-                    <span>{{ currentItem.name }}</span>
+                <el-row >
+                    <span class="name">{{ currentItem.name }}</span>
                     <span class="activity-info">{{ currentItem.activity }}</span>
-                  </el-col>
-                  <el-col>
                     <el-button
                       type="text"
                       style="float:right"
@@ -107,7 +102,6 @@
                       plain
                       @click="handleDelete(scope.$index, scope.row)"
                     >编辑</el-button>
-                  </el-col>
                 </el-row>
                 <el-row>
                   <div class="date">{{ currentItem.date }}</div>
@@ -337,30 +331,45 @@ export default {
   line-height: 60px;
 }
 
+.activity-detail {
+  height: 100vh;
+  /* auto; */
+  /* height: 500px;  */
+  /* text-align: center; */
+  border: 1px solid #eee;
+}
+
+.activities {
+  background-color: rgb(238, 241, 246);
+  margin: 0;
+  /* height:calc(100vh - 20px); */
+  /* height:calc(100vh - 20px); */
+  max-height: 80vh;
+}
+
 .image {
   width: 60px;
   height: 60px;
   display: block;
-}
-
-.activity-detail {
-  height: auto;
-  /* text-align: center; */
+  margin: auto;
 }
 
 .avatar {
   width: 80px;
   height: 80px;
+  text-align:center;
+  margin: auto;
   /* padding: 3px; */
 }
 
-.activity-detail .name {
-  font-size: medium;
+.name {
+  /* font-size: medium; */
+  padding: 0 10px 0 0;
 }
 
-.activity-detail .activity-info {
-  color: lightskyblue;
-  padding: 10px;
+.activity-info {
+  color: #3a8ee6;
+  /* padding: 10px; */
 }
 
 .extra-info {
@@ -393,7 +402,7 @@ export default {
 
 .separate::before {
   color: #409eff;
-  padding: 8px 0 8px;
+  padding: 0 3px;
   content: "|";
 }
 </style>
