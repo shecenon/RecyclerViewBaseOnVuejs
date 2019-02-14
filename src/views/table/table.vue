@@ -38,25 +38,25 @@
         </el-form>
 
         <el-container style="max-height: 80vh">
-          <el-aside width="400px" class="activities">
+          <el-aside width="360px" class="activities">
             <!--表格-->
-            <el-table :data="tableData" :show-header="false" border style="width: 100%">
+            <el-table :data="tableData" :show-header="false" size="mini" border style="width: 100%">
               <!-- <el-table-column prop="date" label="出生日期" width="180"> -->
               <el-table-column>
                 <template scope="scope">
                   <el-container>
                     <!-- <el-aside width="60px" style="text-align:center"> -->
-                      <img :src="scope.row.avatar" class="image">
+                    <img :src="scope.row.avatar" class="image">
                     <!-- </el-aside> -->
-                    <el-main>
+                    <el-main style="padding: 5px">
                       <el-row>
-                          <div style="float:right">
-                            <span class="activity-info">点赞({{scope.row.likes}})</span>
-                            <span class="separate"/>
-                            <span class="activity-info">评论({{scope.row.replies}})</span>
-                          </div>
-                          <span class="name">{{ scope.row.name }}</span>
-                          <span class="activity-info">{{ scope.row.activity }}</span>
+                        <div style="float:right">
+                          <span class="activity-info">点赞({{scope.row.likes}})</span>
+                          <span class="separate"/>
+                          <span class="activity-info">评论({{scope.row.replies}})</span>
+                        </div>
+                        <span class="name">{{ scope.row.name }}</span>
+                        <span class="activity-info">{{ scope.row.activity }}</span>
                       </el-row>
                       <el-row>
                         <span class="date">{{ scope.row.date }}</span>
@@ -87,28 +87,29 @@
           </el-aside>
 
           <el-main class="activity-detail">
-            <el-container >
+            <el-container>
               <!-- <el-aside width="88px" > -->
-                <img :src="currentItem.avatar" class="avatar">
+              <img :src="currentItem.avatar" class="avatar">
               <!-- </el-aside> -->
-              <el-main>
-                <el-row >
-                    <span class="name">{{ currentItem.name }}</span>
-                    <span class="activity-info">{{ currentItem.activity }}</span>
-                    <el-button
-                      type="text"
-                      style="float:right"
-                      size="medium"
-                      plain
-                      @click="handleDelete(scope.$index, scope.row)"
-                    >编辑</el-button>
+              <el-main style="padding: 5px">
+                <el-row class="detail-row">
+                  <span class="name">{{ currentItem.name }}</span>
+                  <span class="activity-info">{{ currentItem.activity }}</span>
+                  <el-button
+                    type="text"
+                    style="float:right;padding: 0"
+                    plain
+                    @click="handleDelete(scope.$index, scope.row)"
+                  >编辑</el-button>
                 </el-row>
-                <el-row>
-                  <div class="date">{{ currentItem.date }}</div>
+                <el-row class="detail-row">
+                  <span class="date">{{ currentItem.date }}</span>
+                </el-row>
+                <el-row class="detail-row">
+                  <span class="address">{{ currentItem.address }}</span>
                 </el-row>
               </el-main>
             </el-container>
-            <div class="address">{{ currentItem.address }}</div>
             <p class="description">{{ currentItem.description }}</p>
             <div style="float:right">
               <el-button type="text" @click="handleLike">点赞</el-button>
@@ -117,12 +118,11 @@
             </div>
             <el-input v-model="commentInput" type="textarea" autosize placeholder="请输入内容"></el-input>
           </el-main>
-
-          <el-aside>
+          <el-aside style="padding: 0 10px">
             <span class="title">基本信息</span>
             <el-form label-position="top" size="medium" inline class="demo-table-expand">
               <el-form-item label="客户名称">
-                <span>123</span>
+                <span>{{ currentItem.company }}</span>
               </el-form-item>
             </el-form>
 
@@ -332,11 +332,16 @@ export default {
 }
 
 .activity-detail {
-  height: 100vh;
+  /* height: 100vh; */
   /* auto; */
   /* height: 500px;  */
   /* text-align: center; */
   border: 1px solid #eee;
+  padding: 0 15px ;
+}
+
+.detail-row {
+  padding: 5px 0;
 }
 
 .activities {
@@ -348,8 +353,8 @@ export default {
 }
 
 .image {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   display: block;
   margin: auto;
 }
@@ -357,7 +362,7 @@ export default {
 .avatar {
   width: 80px;
   height: 80px;
-  text-align:center;
+  text-align: center;
   margin: auto;
   /* padding: 3px; */
 }
@@ -379,14 +384,14 @@ export default {
 }
 
 .address {
-  padding: 10px 0 10px;
+  /* padding: 10px 0 10px; */
 }
 .address:before {
   content: "地址：";
 }
 
 .description {
-  padding: 10px 0 10px;
+  padding: 5px 0 5px;
   line-height: normal;
 }
 
