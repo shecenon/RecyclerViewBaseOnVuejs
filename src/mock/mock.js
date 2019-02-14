@@ -17,6 +17,7 @@ export default {
       "code": "000",
       "datas|5-100": [
         {
+          "id": '@increment',
           "date": '@date("yyyy-MM-dd")',
           "name": "@cname",
           "address": "@county(true)",

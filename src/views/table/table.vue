@@ -41,10 +41,11 @@
           <el-aside width="360px" class="activities">
             <!--表格-->
             <el-table :data="tableData" :show-header="false" size="mini" border style="width: 100%">
+              <!-- @row-click="handleTableRowClick" > -->
               <!-- <el-table-column prop="date" label="出生日期" width="180"> -->
               <el-table-column>
                 <template scope="scope">
-                  <el-container>
+                  <el-container @click.native="handleShowActivity(scope.$index, scope.row)">
                     <!-- <el-aside width="60px" style="text-align:center"> -->
                     <img :src="scope.row.avatar" class="image">
                     <!-- </el-aside> -->
@@ -99,7 +100,7 @@
                     type="text"
                     style="float:right;padding: 0"
                     plain
-                    @click="handleDelete(scope.$index, scope.row)"
+                    @click="handleEdit()"
                   >编辑</el-button>
                 </el-row>
                 <el-row class="detail-row">
@@ -230,6 +231,10 @@ export default {
     }
   },
   methods: {
+    handleShowActivity(index, row) {
+      console.log("click row " + index);
+      this.table_index = index;
+    },
     onSubmit() {
       this.$message("模拟数据，这个方法并不管用哦~");
     },
@@ -337,7 +342,7 @@ export default {
   /* height: 500px;  */
   /* text-align: center; */
   border: 1px solid #eee;
-  padding: 0 15px ;
+  padding: 0 15px;
 }
 
 .detail-row {
